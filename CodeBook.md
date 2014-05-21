@@ -5,20 +5,21 @@
 ## Loading and Processing  Data
 
 This data is originally extracted from 
-[a link](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+[http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 
 We used 
-[a link](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+[https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
                
 Loaded the files 
-    *features.txt"
-    *activity_labels.txt"
-    *train/X_train.txt
-    *train/y_train.txt
-    *train/subject_train.txt
-    *test/X_test.txt
-    *test/y_test.txt
-    *test/subject_test.txt
+
+    * features.txt"
+    * activity_labels.txt"
+    * train/X_train.txt
+    * train/y_train.txt
+    * train/subject_train.txt  
+    * test/X_test.txt
+    * test/y_test.txt
+    * test/subject_test.txt
 
 
 into the corresponsing data frame variables features, activity_labels, X_train, y_train, subject_train, X_test, y_test, and subject_test.

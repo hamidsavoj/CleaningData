@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Loading and Processing  Data</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<p>#Course Project for Getting and Cleaning Data</p>
+
+<h2>Loading and Processing  Data</h2>
+
+<p>This data is originally extracted from 
+<a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a></p>
+
+<p>We used 
+<a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip</a></p>
+
+<p>Loaded the files </p>
+
+<pre><code>* features.txt&quot;
+* activity_labels.txt&quot;
+* train/X_train.txt
+* train/y_train.txt
+* train/subject_train.txt  
+* test/X_test.txt
+* test/y_test.txt
+* test/subject_test.txt
+</code></pre>
+
+<p>into the corresponsing data frame variables features, activity_labels, X_train, y_train, subject_train, X_test, y_test, and subject_test.</p>
+
+<h2>Merging, Cleaning, and Creating First Tidy Data</h2>
+
+<p>The rows of test data and train data are merged to created merged variables subject_merge, X_merge, and y_merge. The column names for <strong>X_merge</strong> data frame are copied from <strong>features</strong> data frame. Some of the names have errors that makes them not match the names of initial data. Corrections are made to convert BodyBody to Body. All columns of <strong>X_merge</strong> that have mean() or std() in their name are pulled out to form a new data frame called <strong>X_merge_tidy</strong>. An extra clean up step, removes <strong>()</strong> from the column names of <strong>X_merge_tidy</strong>. Also added a new column labeled <strong>activity</strong> that shows type of activity for each row of
+<strong>X_merge_tidy</strong>. X_merge_tidy is written into the file X_merge_tidy.csv. The separator used for writing this data is <strong>,Tab</strong>.</p>
+
+<h2>Creating Second Tidy Data</h2>
+
+<p>The variable <strong>twofactor</strong> is a list that combines activity and subject factors. The average for each subset of each column of <strong>X_merge_tidy</strong> is stored in a new data frame. All data frames are assembled into a list called <strong>listOfDataFrames</strong>. Each data frame has 6 rows corresponding to 6 activities and 30 columns corresponding to 30 subjects. The values stored at each data frame in <strong>listOfDataFrames</strong> correspond to averages of one of the columns of <strong>X_merge_tidy</strong>. The lables for each row of 
+<strong>listOfDataFrames[i]</strong> are adjusted to represent the device and also the column of <strong>X_merge_tidy</strong>. This is done by concatenating the two string and storing it in the row lablel. Also an extra column is added to each dataframe storing the corresponding name of the column of <strong>X_merge_tidy</strong>.</p>
+
+<p>The final tidy data <strong>avgTidyData</strong> is a dataframe obtained by combining all data frames in <strong>listOfDataFrames</strong>. This data is written to avgTidyData.csv. The separator used for writing this data is <strong>,Tab</strong>.</p>
+
+</body>
+
+</html>
+
