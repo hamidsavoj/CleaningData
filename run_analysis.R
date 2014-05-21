@@ -39,7 +39,8 @@ colnames(X_merge_tidy)<-gsub("()", "", colnames(X_merge_tidy), fixed = TRUE)
 ##create a new column that has activity labels. 
 X_merge_tidy$activity <- activity_lables$V2[y_merge$V1]
 
-write.table(X_merge_tidy, file ="X_merge_tidy.csv", sep=",\t")
+##file looks cleaner using capture
+capture.output( print(X_merge_tidy, print.gap=3), file="X_merge_tidy.txt")
 
 ##creating second data set 
 ##combine activity with subject for subsetting the data
@@ -47,19 +48,21 @@ write.table(X_merge_tidy, file ="X_merge_tidy.csv", sep=",\t")
 ##results is stored listOfDataFrames. 
 ##There are 66 columns of data. A new data frame is created for each column. All data frames are stored in a list.
 ##The list is called listOfDataFrames.
-##Adjust row labels in each  data frame to show where data is coming from
+##Row labels in each  data frame  show where data is coming from
+## Used unmatrix from gdata library to convert matrix to vector and then data frame
 twofactor<- list(X_merge_tidy$activity, factor(subject_merge$V1))
 listOfDataFrames <- NULL
 colLength<-length(cols)
 for (i in 1:colLength) {
-    listOfDataFrames[[i]]<-as.data.frame(tapply(X_merge_tidy[,i], twofactor, FUN=mean))
-    listOfDataFrames[[i]]$measurement<-rep(colnames(X_merge_tidy)[i], 6)
-    rownames(listOfDataFrames[[i]])<-paste(colnames(X_merge_tidy)[i], rownames(listOfDataFrames[[i]]), sep=" ")
+    listOfDataFrames[[i]]<-as.data.frame(unmatrix(tapply(X_merge_tidy[,i], twofactor, FUN=mean)))
+    colnames(listOfDataFrames[[i]])<-colnames(X_merge_tidy)[i]
 }
 
 ##combine all data frame into one large dataframe
 ##since row names are adjusted. It is easy to figure out where the average is coming from.
-avgTidyData<-as.data.frame(do.call(rbind, listOfDataFrames))
+avgTidyData<-as.data.frame(do.call(cbind, listOfDataFrames))
 
-write.table(avgTidyData, "AvgTidyData.csv", col.names=TRUE, sep=",\t")
+##file looks cleaner using capture
+capture.output( print(avgTidyData, print.gap=3), file="AvgTidyData.txt")
+
 
