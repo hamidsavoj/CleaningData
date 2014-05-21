@@ -1,4 +1,3 @@
-CleaningData
-============
+#Course Project for Getting and Cleaning Data
 
-Project for Clean Data Course
+There is only one script **run_analysis.R** for **cleaning Human Activity Recognition Using Smartphones** data. It reads all the relevant files and creates two tidy data sets. The details are in CodeBook.md. This script expects two local files features.txt,  activity_labels.txt, and the subdirectories train and test to be in the current directory where script is run. The *.csv files are saved into the current directory.
