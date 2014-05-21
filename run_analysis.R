@@ -40,6 +40,7 @@ colnames(X_merge_tidy)<-gsub("()", "", colnames(X_merge_tidy), fixed = TRUE)
 X_merge_tidy$activity <- activity_lables$V2[y_merge$V1]
 
 ##file looks cleaner using capture
+options(max.print=5.5E5) 
 capture.output( print(X_merge_tidy, print.gap=3), file="X_merge_tidy.txt")
 
 ##creating second data set 
