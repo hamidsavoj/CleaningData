@@ -35,6 +35,7 @@ X_merge_tidy<-X_merge[,sort(cols)]
 
 ##get rid of () in column names
 colnames(X_merge_tidy)<-gsub("()", "", colnames(X_merge_tidy), fixed = TRUE)
+colnames(X_merge_tidy)<-gsub("-", ".", colnames(X_merge_tidy), fixed = TRUE)
 
 ##create a new column that has activity labels. 
 X_merge_tidy$activity <- activity_lables$V2[y_merge$V1]
